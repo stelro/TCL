@@ -2,6 +2,10 @@
 #define SPLASHDIALOG_HPP
 
 #include <QDialog>
+#include <QList>
+#include <QSerialPortInfo>
+
+class MainWindow;
 
 namespace Ui {
 class SplashDialog;
@@ -17,6 +21,13 @@ public:
 
 private:
     Ui::SplashDialog *ui;
+    QList<QSerialPortInfo> mAvaliableSPorts;
+    MainWindow *mMainWindow;
+
+private slots:
+    void showMainWindow();
+    void updateSerialValue(const QString& value);
+    void updateDialog();
 };
 
 #endif // SPLASHDIALOG_HPP

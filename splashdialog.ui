@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>234</height>
+    <height>241</height>
    </rect>
   </property>
   <property name="contextMenuPolicy">
@@ -28,7 +28,7 @@
    <property name="title">
     <string>Available Ports:</string>
    </property>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="mAvailablePorts">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -61,6 +61,22 @@
      <string>TextLabel</string>
     </property>
    </widget>
+  </widget>
+  <widget class="QLabel" name="mMainImage">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>40</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources.qrc">:/Paper Windmill-50.png</pixmap>
+   </property>
   </widget>
   <widget class="QWidget" name="">
    <property name="geometry">
@@ -103,6 +119,8 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

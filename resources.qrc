@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Turbocharger-50.png</file>
+        <file>Wind Turbine-100.png</file>
+        <file>Paper Windmill-50.png</file>
+    </qresource>
+</RCC>
