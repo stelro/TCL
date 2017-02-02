@@ -1,7 +1,18 @@
 <RCC>
     <qresource prefix="/">
-        <file>Turbocharger-50.png</file>
-        <file>Wind Turbine-100.png</file>
-        <file>Paper Windmill-50.png</file>
+        <file>windmill.png</file>
+        <file>wind.png</file>
+        <file>turbo.png</file>
+        <file>settings.png</file>
+        <file>exit.png</file>
+        <file>chart.png</file>
+        <file>turbo-white.png</file>
+        <file>settings-white.png</file>
+        <file>exit-white.png</file>
+        <file>chart-white.png</file>
+        <file>turbine-grey.png</file>
+        <file>settings-grey.png</file>
+        <file>exit-grey.png</file>
+        <file>chart-grey.png</file>
     </qresource>
 </RCC>

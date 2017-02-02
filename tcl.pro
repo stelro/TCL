@@ -16,14 +16,17 @@ TEMPLATE = app
 SOURCES += main.cpp\
         splashdialog.cpp \
     mainwindow.cpp \
-    preferences.cpp
+    preferences.cpp \
+    qcgaugewidget.cpp
 
 HEADERS  += splashdialog.hpp \
     mainwindow.hpp \
-    preferences.hpp
+    preferences.hpp \
+    qcgaugewidget.hpp
 
 FORMS    += splashdialog.ui \
     mainwindow.ui
 
 RESOURCES += \
     resources.qrc
+
