@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 class QListWidgetItem;
+class QWidget;
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +23,13 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    QWidget *turbinePage;
+    QWidget *chartPage;
+    QWidget *settingsPage;
+
+
+
 };
 
 #endif // MAINWINDOW_HPP

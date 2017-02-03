@@ -489,7 +489,7 @@ QcColorBand::QcColorBand(QObject *parent) :
     tmpColor.setAlphaF(0.1);
     QPair<QColor,float> pair;
 
-    pair.first = Qt::green;
+    pair.first = QColor(153,167,176);
     pair.second = 80;
     mBandColors.append(pair);
 

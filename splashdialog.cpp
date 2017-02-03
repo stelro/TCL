@@ -2,6 +2,7 @@
 #include "ui_splashdialog.h"
 #include "mainwindow.hpp"
 #include "preferences.hpp"
+#include "titlebar.hpp"
 
 #include <QLineEdit>
 #include <QApplication>
@@ -14,6 +15,8 @@ SplashDialog::SplashDialog(QWidget *parent) :
     ui(new Ui::SplashDialog)
 {
     ui->setupUi(this);
+
+    TitleBar *mTitleBar = new TitleBar(this);
 
     /* Disable title bar from QDialog */
 
@@ -47,10 +50,12 @@ SplashDialog::SplashDialog(QWidget *parent) :
 
     /* Change label text and inherit title from QDialog form */
 
-    ui->mTitleLabel->setText( this->windowTitle() );
+    //ui->mTitleLabel->setText( this->windowTitle() );
 
     /* Prevent from window resizing */
     this->setFixedSize(this->size());
+
+    ui->verticalLayout->addWidget(mTitleBar);
 
     updateDialog();
 }

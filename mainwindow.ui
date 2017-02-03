@@ -11,16 +11,16 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>T.C.L Turbine Counter &amp; Logger</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QListWidget" name="mTabBar">
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>30</y>
       <width>61</width>
-      <height>401</height>
+      <height>371</height>
      </rect>
     </property>
     <property name="iconSize">
@@ -42,15 +42,28 @@
      <enum>QListView::IconMode</enum>
     </property>
    </widget>
-   <widget class="QWidget" name="mTabContainer" native="true">
+   <widget class="QStackedWidget" name="mTabContainer">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>40</y>
-      <width>251</width>
-      <height>41</height>
+      <x>60</x>
+      <y>30</y>
+      <width>1211</width>
+      <height>371</height>
      </rect>
     </property>
+    <widget class="QWidget" name="page"/>
+    <widget class="QWidget" name="page_2"/>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1271</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout"/>
    </widget>
   </widget>
   <action name="action_Exit">

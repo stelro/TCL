@@ -17,12 +17,20 @@ SOURCES += main.cpp\
         splashdialog.cpp \
     mainwindow.cpp \
     preferences.cpp \
-    qcgaugewidget.cpp
+    qcgaugewidget.cpp \
+    turbinetabpage.cpp \
+    settingstabpage.cpp \
+    charttabpage.cpp \
+    titlebar.cpp
 
 HEADERS  += splashdialog.hpp \
     mainwindow.hpp \
     preferences.hpp \
-    qcgaugewidget.hpp
+    qcgaugewidget.hpp \
+    turbinetabpage.hpp \
+    settingstabpage.hpp \
+    charttabpage.hpp \
+    titlebar.hpp
 
 FORMS    += splashdialog.ui \
     mainwindow.ui
