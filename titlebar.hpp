@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QPoint>
 
+class QLabel;
+
 class TitleBar : public QWidget
 {
 public:
@@ -19,7 +21,7 @@ private:
     QWidget *mParent;
     QPoint mCursor;
     QPoint mLastMousePosition;
-        bool mMoving;
+    bool mMoving;
 };
 
 #endif // TITLEBAR_HPP

@@ -49,6 +49,36 @@ void Preferences::cacheRemoveAll()
     }
 }
 
+void Preferences::setTurbineName1(QString name)
+{
+    mTurbineName1 = name;
+    emit turbineName1Changed(name);
+}
+
+void Preferences::setTurbineName2(QString name)
+{
+    mTurbineName2 = name;
+    emit turbineName2Changed(name);
+}
+
+void Preferences::setTurbineName3(QString name)
+{
+    mTurbineName3 = name;
+    emit turbineName3Changed(name);
+}
+
+void Preferences::setTurbineName4(QString name)
+{
+    mTurbineName4 = name;
+    emit turbineName4Changed(name);
+}
+
+void Preferences::setTurbineName5(QString name)
+{
+    mTurbineName5 = name;
+    emit turbineName5Changed(name);
+}
+
 
 void Preferences::deleteInstance()
 {
@@ -60,6 +90,11 @@ void Preferences::deleteInstance()
 
 Preferences::Preferences()
     : mSettings(new QSettings(this))
+    , mTurbineName1("TURBINE 1")
+    , mTurbineName2("TURBINE 2")
+    , mTurbineName3("TURBINE 3")
+    , mTurbineName4("TURBINE 4")
+    , mTurbineName5("TURBINE 5")
 {
 
 }

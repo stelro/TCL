@@ -1,18 +1,11 @@
 <RCC>
     <qresource prefix="/">
         <file>windmill.png</file>
-        <file>wind.png</file>
-        <file>turbo.png</file>
-        <file>settings.png</file>
-        <file>exit.png</file>
-        <file>chart.png</file>
         <file>turbo-white.png</file>
-        <file>settings-white.png</file>
-        <file>exit-white.png</file>
-        <file>chart-white.png</file>
-        <file>turbine-grey.png</file>
-        <file>settings-grey.png</file>
-        <file>exit-grey.png</file>
-        <file>chart-grey.png</file>
+        <file>exit_icon.png</file>
+        <file>jet_icon.png</file>
+        <file>plot_icon.png</file>
+        <file>settings_icon.png</file>
+        <file>Exit-52.png</file>
     </qresource>
 </RCC>

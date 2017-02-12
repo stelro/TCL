@@ -11,8 +11,7 @@ TitleBar::TitleBar(QWidget *parent)
 
 
     QHBoxLayout *layout = new QHBoxLayout( this );
-    layout->addWidget( label, 1 );
-
+    layout->addWidget( label, 1, Qt::AlignLeft );
 }
 
 void TitleBar::mousePressEvent(QMouseEvent *event)

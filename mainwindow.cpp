@@ -41,19 +41,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QListWidgetItem *_turbineTab = new QListWidgetItem(ui->mTabBar);
     _turbineTab->setText("RPM");
-    _turbineTab->setIcon( QIcon(":/turbine-grey.png") );
+    _turbineTab->setIcon( QIcon(":/jet_icon.png") );
 
     QListWidgetItem *_chartTab = new QListWidgetItem(ui->mTabBar);
     _chartTab->setText("Chart");
-    _chartTab->setIcon( QIcon(":/chart-grey.png") );
+    _chartTab->setIcon( QIcon(":/plot_icon.png") );
 
     QListWidgetItem *_settingsTab = new QListWidgetItem(ui->mTabBar);
     _settingsTab->setText("Settings");
-    _settingsTab->setIcon( QIcon(":/settings-grey.png") );
+    _settingsTab->setIcon( QIcon(":/settings_icon.png") );
 
     QListWidgetItem *_exitTab = new QListWidgetItem(ui->mTabBar);
     _exitTab->setText("Exit");
-    _exitTab->setIcon( QIcon(":/exit-grey.png") );
+    _exitTab->setIcon( QIcon(":/Exit-52.png") );
 
     //ui->mTitleLabel->setText( this->windowTitle() );
 

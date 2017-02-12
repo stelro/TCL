@@ -1,284 +1,349 @@
 #include "turbinetabpage.hpp"
 #include "qcgaugewidget.hpp"
+#include "preferences.hpp"
+#include "turbinewidget.hpp"
 
 #include <QGroupBox>
 #include <QLayout>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QLCDNumber>
+#include <QSerialPort>
+#include <QThread>
 
-const int TURBINE_WIDTH = 220;
-const int TURBINE_HEIGHT = 220;
-const int LCD_WIDTH = 140;
-const int LCD_HEIGHT = 40;
+#include <string>
+
+const int TURBINE_WIDTH = 180;
+const int TURBINE_HEIGHT = 180;
 
 TurbineTabPage::TurbineTabPage()
-    : mTurbineCounter1(new QcGaugeWidget)
-    , mTurbineCounter2(new QcGaugeWidget)
-    , mTurbineCounter3(new QcGaugeWidget)
-    , mTurbineCounter4(new QcGaugeWidget)
-    , mTurbineCounter5(new QcGaugeWidget)
-    , mLcdScreen1(new QLCDNumber)
-    , mLcdScreen2(new QLCDNumber)
-    , mLcdScreen3(new QLCDNumber)
-    , mLcdScreen4(new QLCDNumber)
-    , mLcdScreen5(new QLCDNumber)
+    : mSerialPort(new QSerialPort(this))
+    , mTurbine1( new TurbineWidget )
+    , mTurbine2( new TurbineWidget )
+    , mTurbine3( new TurbineWidget )
+    , mTurbine4( new TurbineWidget )
+    , mTurbine5( new TurbineWidget )
+    , mTurbine6( new TurbineWidget )
+    , mTurbine7( new TurbineWidget )
+    , mTurbine8( new TurbineWidget )
+    , mTurbine9( new TurbineWidget )
+    , mTurbine10( new TurbineWidget )
+    , mTurbine11( new TurbineWidget )
+    , mTurbine12( new TurbineWidget )
+    , mTurbine13( new TurbineWidget )
+    , mTurbine14( new TurbineWidget )
+    , mTurbine15( new TurbineWidget )
 {
 
-    initializeTurbine1();
-    initializeTurbine2();
-    initializeTurbine3();
-    initializeTurbine4();
-    initializeTurbine5();
+    /* Initialize Serial Port */
 
-    QGroupBox *groupBox1 = new QGroupBox("TURBINE 1");
-    QGroupBox *groupBox2 = new QGroupBox("TURBINE 2");
-    QGroupBox *groupBox3 = new QGroupBox("TURBINE 3");
-    QGroupBox *groupBox4 = new QGroupBox("TURBINE 4");
-    QGroupBox *groupBox5 = new QGroupBox("TURBINE 5");
+    Preferences *prefs = Preferences::instance();
+    mSerialPort->setPortName(prefs->cacheLookup("port"));
+    mSerialPort->open(QIODevice::ReadWrite);
+    mSerialPort->setBaudRate(QSerialPort::Baud9600); //must be the same as your arduino-baudrate
+    mSerialPort->setDataBits(QSerialPort::Data8);
+    mSerialPort->setParity(QSerialPort::NoParity);
+    mSerialPort->setStopBits(QSerialPort::OneStop);
+    mSerialPort->setFlowControl(QSerialPort::NoFlowControl);
 
-    QHBoxLayout *hlayout = new QHBoxLayout;
-    hlayout->addWidget(groupBox1);
-    hlayout->addWidget(groupBox2);
-    hlayout->addWidget(groupBox3);
-    hlayout->addWidget(groupBox4);
-    hlayout->addWidget(groupBox5);
+    groupBox1 = new QGroupBox("TURBINE 0");
+    groupBox2 = new QGroupBox("TURBINE 1");
+    groupBox3 = new QGroupBox("TURBINE 2");
+    groupBox4 = new QGroupBox("TURBINE 3");
+    groupBox5 = new QGroupBox("TURBINE 4");
+    groupBox6 = new QGroupBox("TURBINE 5");
+    groupBox7 = new QGroupBox("TURBINE 6");
+    groupBox8 = new QGroupBox("TURBINE 7");
+    groupBox9 = new QGroupBox("TURBINE 8");
+    groupBox10 = new QGroupBox("TURBINE 9");
+    groupBox11 = new QGroupBox("TURBINE 10");
+    groupBox12 = new QGroupBox("TURBINE 11");
+    groupBox13 = new QGroupBox("TURBINE 12");
+    groupBox14 = new QGroupBox("TURBINE 13");
+    groupBox15 = new QGroupBox("TURBINE 14");
 
-    mTurbineCounter1->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
-    mTurbineCounter2->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
-    mTurbineCounter3->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
-    mTurbineCounter4->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
-    mTurbineCounter5->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    QHBoxLayout *hlayout1 = new QHBoxLayout;
+    hlayout1->addWidget(groupBox1);
+    hlayout1->addWidget(groupBox2);
+    hlayout1->addWidget(groupBox3);
+    hlayout1->addWidget(groupBox4);
+    hlayout1->addWidget(groupBox5);
 
-    mLcdScreen1->setSegmentStyle(QLCDNumber::Flat);
-    mLcdScreen1->setFixedSize(LCD_WIDTH,LCD_HEIGHT);
+    QHBoxLayout *hlayout2 = new QHBoxLayout;
+    hlayout2->addWidget(groupBox6);
+    hlayout2->addWidget(groupBox7);
+    hlayout2->addWidget(groupBox8);
+    hlayout2->addWidget(groupBox9);
+    hlayout2->addWidget(groupBox10);
 
-    mLcdScreen2->setSegmentStyle(QLCDNumber::Flat);
-    mLcdScreen2->setFixedSize(LCD_WIDTH,LCD_HEIGHT);
+    QHBoxLayout *hlayout3 = new QHBoxLayout;
+    hlayout3->addWidget(groupBox11);
+    hlayout3->addWidget(groupBox12);
+    hlayout3->addWidget(groupBox13);
+    hlayout3->addWidget(groupBox14);
+    hlayout3->addWidget(groupBox15);
 
-    mLcdScreen3->setSegmentStyle(QLCDNumber::Flat);
-    mLcdScreen3->setFixedSize(LCD_WIDTH,LCD_HEIGHT);
+    QVBoxLayout *vlayout = new QVBoxLayout;
+    vlayout->addLayout(hlayout1);
+    vlayout->addLayout(hlayout2);
+    vlayout->addLayout(hlayout3);
 
-    mLcdScreen4->setSegmentStyle(QLCDNumber::Flat);
-    mLcdScreen4->setFixedSize(LCD_WIDTH,LCD_HEIGHT);
 
-    mLcdScreen5->setSegmentStyle(QLCDNumber::Flat);
-    mLcdScreen5->setFixedSize(LCD_WIDTH,LCD_HEIGHT);
+    mTurbine1->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    mTurbine2->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    mTurbine3->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    mTurbine4->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    mTurbine5->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    mTurbine6->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    mTurbine7->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    mTurbine8->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    mTurbine9->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    mTurbine10->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    mTurbine11->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    mTurbine12->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    mTurbine13->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    mTurbine14->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
+    mTurbine15->setFixedSize(TURBINE_WIDTH,TURBINE_HEIGHT);
 
     QVBoxLayout *vlayoutGroup1 = new QVBoxLayout;
-    vlayoutGroup1->addWidget(mTurbineCounter1);
-    vlayoutGroup1->addWidget(mLcdScreen1,0,Qt::AlignHCenter);
+    vlayoutGroup1->addWidget(mTurbine1);
 
     QVBoxLayout *vlayoutGroup2 = new QVBoxLayout;
-    vlayoutGroup2->addWidget(mTurbineCounter2);
-    vlayoutGroup2->addWidget(mLcdScreen2,0,Qt::AlignHCenter);
+    vlayoutGroup2->addWidget(mTurbine2);
 
     QVBoxLayout *vlayoutGroup3 = new QVBoxLayout;
-    vlayoutGroup3->addWidget(mTurbineCounter3);
-    vlayoutGroup3->addWidget(mLcdScreen3,0,Qt::AlignHCenter);
+    vlayoutGroup3->addWidget(mTurbine3);
 
     QVBoxLayout *vlayoutGroup4 = new QVBoxLayout;
-    vlayoutGroup4->addWidget(mTurbineCounter4);
-    vlayoutGroup4->addWidget(mLcdScreen4,0,Qt::AlignHCenter);
+    vlayoutGroup4->addWidget(mTurbine4);
 
     QVBoxLayout *vlayoutGroup5 = new QVBoxLayout;
-    vlayoutGroup5->addWidget(mTurbineCounter5);
-    vlayoutGroup5->addWidget(mLcdScreen5,0,Qt::AlignHCenter);
+    vlayoutGroup5->addWidget(mTurbine5);
+
+    QVBoxLayout *vlayoutGroup6 = new QVBoxLayout;
+    vlayoutGroup6->addWidget(mTurbine6);
+
+    QVBoxLayout *vlayoutGroup7 = new QVBoxLayout;
+    vlayoutGroup7->addWidget(mTurbine7);
+
+    QVBoxLayout *vlayoutGroup8 = new QVBoxLayout;
+    vlayoutGroup8->addWidget(mTurbine8);
+
+    QVBoxLayout *vlayoutGroup9 = new QVBoxLayout;
+    vlayoutGroup9->addWidget(mTurbine9);
+
+    QVBoxLayout *vlayoutGroup10 = new QVBoxLayout;
+    vlayoutGroup10->addWidget(mTurbine10);
+
+    QVBoxLayout *vlayoutGroup11 = new QVBoxLayout;
+    vlayoutGroup11->addWidget(mTurbine11);
+
+    QVBoxLayout *vlayoutGroup12 = new QVBoxLayout;
+    vlayoutGroup12->addWidget(mTurbine12);
+
+    QVBoxLayout *vlayoutGroup13 = new QVBoxLayout;
+    vlayoutGroup13->addWidget(mTurbine13);
+
+    QVBoxLayout *vlayoutGroup14 = new QVBoxLayout;
+    vlayoutGroup14->addWidget(mTurbine14);
+
+    QVBoxLayout *vlayoutGroup15 = new QVBoxLayout;
+    vlayoutGroup15->addWidget(mTurbine15);
 
     groupBox1->setLayout(vlayoutGroup1);
     groupBox2->setLayout(vlayoutGroup2);
     groupBox3->setLayout(vlayoutGroup3);
     groupBox4->setLayout(vlayoutGroup4);
     groupBox5->setLayout(vlayoutGroup5);
+    groupBox6->setLayout(vlayoutGroup6);
+    groupBox7->setLayout(vlayoutGroup7);
+    groupBox8->setLayout(vlayoutGroup8);
+    groupBox9->setLayout(vlayoutGroup9);
+    groupBox10->setLayout(vlayoutGroup10);
+    groupBox11->setLayout(vlayoutGroup11);
+    groupBox12->setLayout(vlayoutGroup12);
+    groupBox13->setLayout(vlayoutGroup13);
+    groupBox14->setLayout(vlayoutGroup14);
+    groupBox15->setLayout(vlayoutGroup15);
 
+    this->setLayout(vlayout);
 
-    this->setLayout(hlayout);
+    connect(this->mSerialPort, SIGNAL(readyRead()), this, SLOT(serialReciver()));
 
+    connect(prefs, SIGNAL(turbineName1Changed(QString)), this, SLOT(setTurbineName1(QString)));
+    connect(prefs, SIGNAL(turbineName2Changed(QString)), this, SLOT(setTurbineName2(QString)));
+    connect(prefs, SIGNAL(turbineName3Changed(QString)), this, SLOT(setTurbineName3(QString)));
+    connect(prefs, SIGNAL(turbineName4Changed(QString)), this, SLOT(setTurbineName4(QString)));
+    connect(prefs, SIGNAL(turbineName5Changed(QString)), this, SLOT(setTurbineName5(QString)));
 }
 
 
-
-void TurbineTabPage::initializeTurbine1()
+void TurbineTabPage::serialReciver()
 {
+    QString input_converter;
+    std::string to_file_string;
+    Preferences *prefs = Preferences::instance();
 
-    /* FIRST TURBINE */
+    //if the whole line isn't available within the next 4 chars
+    if (mSerialPort->bytesAvailable() < 5)
+        return; //return from this call (wait for the next readyRead() signal)
 
-    QcNeedleItem *rpmNeedle;
+    char dataBuffer[6];
 
-    mTurbineCounter1->addBackground(20);
-    QcBackgroundItem *bkg1 = mTurbineCounter1->addBackground(92);
-    bkg1->clearrColors();
-    bkg1->addColor(0.1,QColor(182,181,176));
-    bkg1->addColor(1.0,QColor(182,181,176));
+    mSerialPort->readLine(dataBuffer,6);
 
-    QcBackgroundItem *bkg2 = mTurbineCounter1->addBackground(88);
-    bkg2->clearrColors();
-    bkg2->addColor(0.1,QColor(50,78,92));
-    bkg2->addColor(1.0,QColor(83,105,118));
+    to_file_string = dataBuffer;
+    input_converter = QString::fromStdString(to_file_string);
 
-    //the dots values , not the numbers
-    mTurbineCounter1->addArc(55);
-    mTurbineCounter1->addDegrees(65)->setValueRange(0,10);
-    mTurbineCounter1->addColorBand(50);
+    char current_turbine = input_converter.at(0).toLatin1();
+    QString current_value = input_converter.mid( 1, input_converter.length() );
 
-    mTurbineCounter1->addValues(80)->setValueRange(0,10);
+    switch (current_turbine) {
+    case 'a':
+        prefs->cacheStore("plot1", current_value);
+        mTurbine1->setValue(current_value.toInt());
+        break;
 
-    mTurbineCounter1->addLabel(70)->setText("RPM");
-    QcLabelItem *lab = mTurbineCounter1->addLabel(40);
-    lab->setText("0");
+    case 'b':
+        prefs->cacheStore("plot2", current_value);
+        mTurbine2->setValue(current_value.toInt());
+        break;
+    case 'c':
+        prefs->cacheStore("plot3", current_value);
+        mTurbine3->setValue(current_value.toInt());
+        break;
 
-    //Needle height
-    rpmNeedle = mTurbineCounter1->addNeedle(60);
-    rpmNeedle->setLabel(lab);
-    rpmNeedle->setColor(QColor(249,89,75));
-    rpmNeedle->setValueRange(0,10000);
-    mTurbineCounter1->addBackground(7);
-    //mTurbineCounter1->addGlass(88);
+    case 'd':
+        prefs->cacheStore("plot4", current_value);
+        mTurbine4->setValue(current_value.toInt());
+        break;
+    case 'e':
+        prefs->cacheStore("plot5", current_value);
+        mTurbine5->setValue(current_value.toInt());
+        break;
+    case 'f':
+        prefs->cacheStore("plot1", current_value);
+        mTurbine6->setValue(current_value.toInt());
+        break;
 
+    case 'g':
+        prefs->cacheStore("plot2", current_value);
+        mTurbine7->setValue(current_value.toInt());
+        break;
+    case 'h':
+        prefs->cacheStore("plot3", current_value);
+        mTurbine8->setValue(current_value.toInt());
+        break;
+
+    case 'i':
+        prefs->cacheStore("plot4", current_value);
+        mTurbine9->setValue(current_value.toInt());
+        break;
+    case 'j':
+        prefs->cacheStore("plot5", current_value);
+        mTurbine10->setValue(current_value.toInt());
+        break;
+    case 'k':
+        prefs->cacheStore("plot1", current_value);
+        mTurbine11->setValue(current_value.toInt());
+        break;
+
+    case 'l':
+        prefs->cacheStore("plot2", current_value);
+        mTurbine12->setValue(current_value.toInt());
+        break;
+    case 'm':
+        prefs->cacheStore("plot3", current_value);
+        mTurbine13->setValue(current_value.toInt());
+        break;
+
+    case 'n':
+        prefs->cacheStore("plot4", current_value);
+        mTurbine14->setValue(current_value.toInt());
+        break;
+    case 'o':
+        prefs->cacheStore("plot5", current_value);
+        mTurbine15->setValue(current_value.toInt());
+        break;
+
+    }
+
+
+
+    if (mSerialPort->bytesAvailable() > 0)
+        QMetaObject::invokeMethod(this, "serialReciver", Qt::QueuedConnection);
 }
 
-void TurbineTabPage::initializeTurbine2()
+void TurbineTabPage::setTurbineName1(QString name)
 {
-    /* SECOND TURBINE */
-
-    QcNeedleItem *rpmNeedle2;
-
-    mTurbineCounter2->addBackground(20);
-    QcBackgroundItem *bkg1 = mTurbineCounter2->addBackground(92);
-    bkg1->clearrColors();
-    bkg1->addColor(0.1,QColor(182,181,176));
-    bkg1->addColor(1.0,QColor(182,181,176));
-
-    QcBackgroundItem *bkg2 = mTurbineCounter2->addBackground(88);
-    bkg2->clearrColors();
-    bkg2->addColor(0.1,QColor(50,78,92));
-    bkg2->addColor(1.0,QColor(83,105,118));
-
-    //the dots values , not the numbers
-    mTurbineCounter2->addArc(55);
-    mTurbineCounter2->addDegrees(65)->setValueRange(0,10);
-    mTurbineCounter2->addColorBand(50);
-
-    mTurbineCounter2->addValues(80)->setValueRange(0,10);
-
-    mTurbineCounter2->addLabel(70)->setText("RPM");
-    QcLabelItem *lab = mTurbineCounter2->addLabel(40);
-    lab->setText("0");
-
-    //Needle height
-    rpmNeedle2 = mTurbineCounter2->addNeedle(60);
-    rpmNeedle2->setLabel(lab);
-    rpmNeedle2->setColor(QColor(249,89,75));
-    rpmNeedle2->setValueRange(0,10000);
-    mTurbineCounter2->addBackground(7);
-
+    this->groupBox1->setTitle(name);
 }
 
-void TurbineTabPage::initializeTurbine3()
+void TurbineTabPage::setTurbineName2(QString name)
 {
-    /* THRID TURBINE */
-
-    QcNeedleItem *rpmNeedle3;
-
-    mTurbineCounter3->addBackground(20);
-    QcBackgroundItem *bkg1 = mTurbineCounter3->addBackground(92);
-    bkg1->clearrColors();
-    bkg1->addColor(0.1,QColor(182,181,176));
-    bkg1->addColor(1.0,QColor(182,181,176));
-
-    QcBackgroundItem *bkg2 = mTurbineCounter3->addBackground(88);
-    bkg2->clearrColors();
-    bkg2->addColor(0.1,QColor(50,78,92));
-    bkg2->addColor(1.0,QColor(83,105,118));
-
-    //the dots values , not the numbers
-    mTurbineCounter3->addArc(55);
-    mTurbineCounter3->addDegrees(65)->setValueRange(0,10);
-    mTurbineCounter3->addColorBand(50);
-
-    mTurbineCounter3->addValues(80)->setValueRange(0,10);
-
-    mTurbineCounter3->addLabel(70)->setText("RPM");
-    QcLabelItem *lab = mTurbineCounter3->addLabel(40);
-    lab->setText("0");
-
-    //Needle height
-    rpmNeedle3 = mTurbineCounter3->addNeedle(60);
-    rpmNeedle3->setLabel(lab);
-    rpmNeedle3->setColor(QColor(249,89,75));
-    rpmNeedle3->setValueRange(0,10000);
-    mTurbineCounter3->addBackground(7);
+    this->groupBox2->setTitle(name);
 }
 
-void TurbineTabPage::initializeTurbine4()
+void TurbineTabPage::setTurbineName3(QString name)
 {
-
-    /* FOURTH TURBINE */
-
-    QcNeedleItem *rpmNeedle4;
-
-    mTurbineCounter4->addBackground(20);
-    QcBackgroundItem *bkg1 = mTurbineCounter4->addBackground(92);
-    bkg1->clearrColors();
-    bkg1->addColor(0.1,QColor(182,181,176));
-    bkg1->addColor(1.0,QColor(182,181,176));
-
-    QcBackgroundItem *bkg2 = mTurbineCounter4->addBackground(88);
-    bkg2->clearrColors();
-    bkg2->addColor(0.1,QColor(50,78,92));
-    bkg2->addColor(1.0,QColor(83,105,118));
-
-    //the dots values , not the numbers
-    mTurbineCounter4->addArc(55);
-    mTurbineCounter4->addDegrees(65)->setValueRange(0,10);
-    mTurbineCounter4->addColorBand(50);
-
-    mTurbineCounter4->addValues(80)->setValueRange(0,10);
-
-    mTurbineCounter4->addLabel(70)->setText("RPM");
-    QcLabelItem *lab = mTurbineCounter4->addLabel(40);
-    lab->setText("0");
-
-    //Needle height
-    rpmNeedle4 = mTurbineCounter4->addNeedle(60);
-    rpmNeedle4->setLabel(lab);
-    rpmNeedle4->setColor(QColor(249,89,75));
-    rpmNeedle4->setValueRange(0,10000);
-    mTurbineCounter4->addBackground(7);
+    this->groupBox3->setTitle(name);
 }
 
-void TurbineTabPage::initializeTurbine5()
+void TurbineTabPage::setTurbineName4(QString name)
 {
-    /* FIFTH TURBINE */
+    this->groupBox4->setTitle(name);
+}
 
-    QcNeedleItem *rpmNeedle5;
+void TurbineTabPage::setTurbineName5(QString name)
+{
+    this->groupBox5->setTitle(name);
+}
 
-    mTurbineCounter5->addBackground(20);
-    QcBackgroundItem *bkg1 = mTurbineCounter5->addBackground(92);
-    bkg1->clearrColors();
-    bkg1->addColor(0.1,QColor(182,181,176));
-    bkg1->addColor(1.0,QColor(182,181,176));
+void TurbineTabPage::setTurbineName6(QString name)
+{
+    this->groupBox6->setTitle(name);
+}
 
-    QcBackgroundItem *bkg2 = mTurbineCounter5->addBackground(88);
-    bkg2->clearrColors();
-    bkg2->addColor(0.1,QColor(50,78,92));
-    bkg2->addColor(1.0,QColor(83,105,118));
+void TurbineTabPage::setTurbineName7(QString name)
+{
+    this->groupBox7->setTitle(name);
+}
 
-    //the dots values , not the numbers
-    mTurbineCounter5->addArc(55);
-    mTurbineCounter5->addDegrees(65)->setValueRange(0,10);
-    mTurbineCounter5->addColorBand(50);
+void TurbineTabPage::setTurbineName8(QString name)
+{
+    this->groupBox8->setTitle(name);
+}
 
-    mTurbineCounter5->addValues(80)->setValueRange(0,10);
+void TurbineTabPage::setTurbineName9(QString name)
+{
+    this->groupBox9->setTitle(name);
+}
 
-    mTurbineCounter5->addLabel(70)->setText("RPM");
-    QcLabelItem *lab = mTurbineCounter5->addLabel(40);
-    lab->setText("0");
+void TurbineTabPage::setTurbineName10(QString name)
+{
+    this->groupBox10->setTitle(name);
+}
+void TurbineTabPage::setTurbineName11(QString name)
+{
+    this->groupBox11->setTitle(name);
+}
 
-    //Needle height
-    rpmNeedle5 = mTurbineCounter5->addNeedle(60);
-    rpmNeedle5->setLabel(lab);
-    rpmNeedle5->setColor(QColor(249,89,75));
-    rpmNeedle5->setValueRange(0,10000);
-    mTurbineCounter5->addBackground(7);
+void TurbineTabPage::setTurbineName12(QString name)
+{
+    this->groupBox12->setTitle(name);
+}
+
+void TurbineTabPage::setTurbineName13(QString name)
+{
+    this->groupBox13->setTitle(name);
+}
+
+void TurbineTabPage::setTurbineName14(QString name)
+{
+    this->groupBox14->setTitle(name);
+}
+
+void TurbineTabPage::setTurbineName15(QString name)
+{
+    this->groupBox15->setTitle(name);
 }
