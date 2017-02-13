@@ -198,6 +198,8 @@ void TurbineTabPage::serialReciver()
     char current_turbine = input_converter.at(0).toLatin1();
     QString current_value = input_converter.mid( 1, input_converter.length() );
 
+    qDebug() << input_converter;
+
     switch (current_turbine) {
     case 'a':
         prefs->cacheStore("plot1", current_value);
