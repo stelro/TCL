@@ -2,6 +2,9 @@
 #define TURBINETABPAGE_HPP
 
 #include <QWidget>
+#include <QDate>
+#include <QTime>
+#include <fstream>
 
 class QcGaugeWidget;
 class QSerialPort;
@@ -14,6 +17,7 @@ class TurbineTabPage : public QWidget
     Q_OBJECT
 public:
     TurbineTabPage();
+    ~TurbineTabPage();
 private slots:
     void serialReciver();
     void setTurbineName1(QString name);
@@ -33,6 +37,10 @@ private slots:
     void setTurbineName15(QString name);
 private:
     QSerialPort *mSerialPort;
+
+    std::ofstream mOutput; //output log file
+    QDate mDate;
+    QString mTime;
 
     TurbineWidget *mTurbine1;
     TurbineWidget *mTurbine2;

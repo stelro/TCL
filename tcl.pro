@@ -20,7 +20,6 @@ SOURCES += main.cpp\
     preferences.cpp \
     qcgaugewidget.cpp \
     turbinetabpage.cpp \
-    settingstabpage.cpp \
     charttabpage.cpp \
     titlebar.cpp \
     qcustomplot/qcustomplot.cpp \
@@ -31,7 +30,6 @@ HEADERS  += splashdialog.hpp \
     preferences.hpp \
     qcgaugewidget.hpp \
     turbinetabpage.hpp \
-    settingstabpage.hpp \
     charttabpage.hpp \
     titlebar.hpp \
     qcustomplot/qcustomplot.h \

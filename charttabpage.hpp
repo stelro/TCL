@@ -60,38 +60,38 @@ private slots:
     void mPlotSet15(bool value) { mPlotEnabled15 = value; }
 
     /* change the actual color of the yAxis in the plot */
-    void changePlotColor1(QColor color);
-    void changePlotColor2(QColor color);
-    void changePlotColor3(QColor color);
-    void changePlotColor4(QColor color);
-    void changePlotColor5(QColor color);
-    void changePlotColor6(QColor color);
-    void changePlotColor7(QColor color);
-    void changePlotColor8(QColor color);
-    void changePlotColor9(QColor color);
-    void changePlotColor10(QColor color);
-    void changePlotColor11(QColor color);
-    void changePlotColor12(QColor color);
-    void changePlotColor13(QColor color);
-    void changePlotColor14(QColor color);
-    void changePlotColor15(QColor color);
+    void changePlotColor1(const QColor& color);
+    void changePlotColor2(const QColor& color);
+    void changePlotColor3(const QColor& color);
+    void changePlotColor4(const QColor& color);
+    void changePlotColor5(const QColor& color);
+    void changePlotColor6(const QColor& color);
+    void changePlotColor7(const QColor& color);
+    void changePlotColor8(const QColor& color);
+    void changePlotColor9(const QColor& color);
+    void changePlotColor10(const QColor& color);
+    void changePlotColor11(const QColor& color);
+    void changePlotColor12(const QColor& color);
+    void changePlotColor13(const QColor& color);
+    void changePlotColor14(const QColor& color);
+    void changePlotColor15(const QColor& color);
 
 signals:
-    void cColor1Changed(QColor color);
-    void cColor2Changed(QColor color);
-    void cColor3Changed(QColor color);
-    void cColor4Changed(QColor color);
-    void cColor5Changed(QColor color);
-    void cColor6Changed(QColor color);
-    void cColor7Changed(QColor color);
-    void cColor8Changed(QColor color);
-    void cColor9Changed(QColor color);
-    void cColor10Changed(QColor color);
-    void cColor11Changed(QColor color);
-    void cColor12Changed(QColor color);
-    void cColor13Changed(QColor color);
-    void cColor14Changed(QColor color);
-    void cColor15Changed(QColor color);
+    void cColor1Changed(const QColor& color);
+    void cColor2Changed(const QColor& color);
+    void cColor3Changed(const QColor& color);
+    void cColor4Changed(const QColor& color);
+    void cColor5Changed(const QColor& color);
+    void cColor6Changed(const QColor& color);
+    void cColor7Changed(const QColor& color);
+    void cColor8Changed(const QColor& color);
+    void cColor9Changed(const QColor& color);
+    void cColor10Changed(const QColor& color);
+    void cColor11Changed(const QColor& color);
+    void cColor12Changed(const QColor& color);
+    void cColor13Changed(const QColor& color);
+    void cColor14Changed(const QColor& color);
+    void cColor15Changed(const QColor& color);
 
 private:
     QString getColorString(const QColor& color);

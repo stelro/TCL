@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include "preferences.hpp"
 #include "turbinetabpage.hpp"
-#include "settingstabpage.hpp"
 #include "charttabpage.hpp"
 #include "titlebar.hpp"
 
@@ -13,8 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     turbinePage(new TurbineTabPage),
-    chartPage(new ChartTabPage),
-    settingsPage(new SettingsTabPage)
+    chartPage(new ChartTabPage)
 {
     ui->setupUi(this);
 
@@ -26,8 +24,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /* Prevent from window resizing */
     this->setFixedSize(this->size());
-
-    Preferences *prefs = Preferences::instance();
 
     this->setStyleSheet("QPushButton {border: none;  border-radius: 2px; height: 36px;  line-height: 36px;  padding: 0 2rem; "
                         "color: #fff; background-color: #333030; text-align: center; }"
@@ -47,10 +43,6 @@ MainWindow::MainWindow(QWidget *parent) :
     _chartTab->setText("Chart");
     _chartTab->setIcon( QIcon(":/plot_icon.png") );
 
-    QListWidgetItem *_settingsTab = new QListWidgetItem(ui->mTabBar);
-    _settingsTab->setText("Settings");
-    _settingsTab->setIcon( QIcon(":/settings_icon.png") );
-
     QListWidgetItem *_exitTab = new QListWidgetItem(ui->mTabBar);
     _exitTab->setText("Exit");
     _exitTab->setIcon( QIcon(":/Exit-52.png") );
@@ -63,7 +55,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->mTabContainer->insertWidget(0, turbinePage);
     ui->mTabContainer->insertWidget(1,chartPage);
-    ui->mTabContainer->insertWidget(2,settingsPage);
 
 }
 
@@ -74,7 +65,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::tabBarItemClicked(QListWidgetItem *item)
 {
-    if (ui->mTabBar->item(3) == item) {
+    if (ui->mTabBar->item(2) == item) {
         this->close();
     }
 }

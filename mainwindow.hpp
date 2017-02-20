@@ -26,10 +26,6 @@ private:
 
     QWidget *turbinePage;
     QWidget *chartPage;
-    QWidget *settingsPage;
-
-
-
 };
 
 #endif // MAINWINDOW_HPP

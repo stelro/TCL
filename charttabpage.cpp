@@ -679,91 +679,91 @@ void ChartTabPage::cColorSet15(bool)
     emit cColor15Changed(ccolor15);
 }
 
-void ChartTabPage::changePlotColor1(QColor color)
+void ChartTabPage::changePlotColor1(const QColor& color)
 {
     mPlot->graph(0)->setPen(QPen(color));
     this->cbutton1->setStyleSheet(getColorString(color));
 }
 
-void ChartTabPage::changePlotColor2(QColor color)
+void ChartTabPage::changePlotColor2(const QColor& color)
 {
     mPlot->graph(1)->setPen(QPen(color));
    this->cbutton2->setStyleSheet(getColorString(color));
 }
 
-void ChartTabPage::changePlotColor3(QColor color)
+void ChartTabPage::changePlotColor3(const QColor& color)
 {
     mPlot->graph(2)->setPen(QPen(color));
     this->cbutton3->setStyleSheet(getColorString(color));
 }
 
-void ChartTabPage::changePlotColor4(QColor color)
+void ChartTabPage::changePlotColor4(const QColor& color)
 {
     mPlot->graph(3)->setPen(QPen(color));
     this->cbutton4->setStyleSheet(getColorString(color));
 }
 
-void ChartTabPage::changePlotColor5(QColor color)
+void ChartTabPage::changePlotColor5(const QColor& color)
 {
     mPlot->graph(4)->setPen(QPen(color));
     this->cbutton5->setStyleSheet(getColorString(color));
 }
 
-void ChartTabPage::changePlotColor6(QColor color)
+void ChartTabPage::changePlotColor6(const QColor& color)
 {
     mPlot->graph(5)->setPen(QPen(color));
     this->cbutton6->setStyleSheet(getColorString(color));
 }
 
-void ChartTabPage::changePlotColor7(QColor color)
+void ChartTabPage::changePlotColor7(const QColor& color)
 {
     mPlot->graph(6)->setPen(QPen(color));
     this->cbutton7->setStyleSheet(getColorString(color));
 }
 
-void ChartTabPage::changePlotColor8(QColor color)
+void ChartTabPage::changePlotColor8(const QColor& color)
 {
     mPlot->graph(7)->setPen(QPen(color));
     this->cbutton8->setStyleSheet(getColorString(color));
 }
 
-void ChartTabPage::changePlotColor9(QColor color)
+void ChartTabPage::changePlotColor9(const QColor& color)
 {
     mPlot->graph(8)->setPen(QPen(color));
     this->cbutton9->setStyleSheet(getColorString(color));
 }
 
-void ChartTabPage::changePlotColor10(QColor color)
+void ChartTabPage::changePlotColor10(const QColor& color)
 {
     mPlot->graph(9)->setPen(QPen(color));
     this->cbutton10->setStyleSheet(getColorString(color));
 }
 
-void ChartTabPage::changePlotColor11(QColor color)
+void ChartTabPage::changePlotColor11(const QColor& color)
 {
     mPlot->graph(10)->setPen(QPen(color));
     this->cbutton11->setStyleSheet(getColorString(color));
 }
 
-void ChartTabPage::changePlotColor12(QColor color)
+void ChartTabPage::changePlotColor12(const QColor& color)
 {
     mPlot->graph(11)->setPen(QPen(color));
     this->cbutton12->setStyleSheet(getColorString(color));
 }
 
-void ChartTabPage::changePlotColor13(QColor color)
+void ChartTabPage::changePlotColor13(const QColor& color)
 {
     mPlot->graph(12)->setPen(QPen(color));
     this->cbutton13->setStyleSheet(getColorString(color));
 }
 
-void ChartTabPage::changePlotColor14(QColor color)
+void ChartTabPage::changePlotColor14(const QColor& color)
 {
     mPlot->graph(13)->setPen(QPen(color));
     this->cbutton14->setStyleSheet(getColorString(color));
 }
 
-void ChartTabPage::changePlotColor15(QColor color)
+void ChartTabPage::changePlotColor15(const QColor& color)
 {
     mPlot->graph(14)->setPen(QPen(color));
     this->cbutton15->setStyleSheet(getColorString(color));

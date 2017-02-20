@@ -46,6 +46,18 @@ TurbineTabPage::TurbineTabPage()
     mSerialPort->setStopBits(QSerialPort::OneStop);
     mSerialPort->setFlowControl(QSerialPort::NoFlowControl);
 
+    mDate = QDate::currentDate();
+    mTime = QTime::currentTime().toString("_hh_mm_ss");
+
+    QString date = mDate.toString("dd_MM_yyyy") + mTime + ".log";
+    QByteArray bytearray = date.toLatin1();
+    const char *file_name = bytearray.data();
+    mOutput.open(file_name);
+
+    mOutput << "[TIME] " << "[T1] " << "[T2] " << "[T3] " << "[T4] " << "[T5] " << "[T6] "
+            << "[T7] " << "[T8] " << "[T9] " << "[T10] " << "[T11] " << "[T12] " << "[T13] "
+            << "[T14] " << "[T15]" << std::endl;
+
     groupBox1 = new QGroupBox("TURBINE 0");
     groupBox2 = new QGroupBox("TURBINE 1");
     groupBox3 = new QGroupBox("TURBINE 2");
@@ -177,6 +189,13 @@ TurbineTabPage::TurbineTabPage()
     connect(prefs, SIGNAL(turbineName5Changed(QString)), this, SLOT(setTurbineName5(QString)));
 }
 
+TurbineTabPage::~TurbineTabPage()
+{
+    if (mOutput.is_open()) {
+        mOutput.close();
+    }
+}
+
 
 void TurbineTabPage::serialReciver()
 {
@@ -198,78 +217,90 @@ void TurbineTabPage::serialReciver()
     char current_turbine = input_converter.at(0).toLatin1();
     QString current_value = input_converter.mid( 1, input_converter.length() );
 
-    qDebug() << input_converter;
+    mTime = QTime::currentTime().toString("hh:mm:ss:zzz");
+    QByteArray bytearray = mTime.toLatin1();
+    char *current_time =  bytearray.data();
 
-    switch (current_turbine) {
-    case 'a':
-        prefs->cacheStore("plot1", current_value);
-        mTurbine1->setValue(current_value.toInt());
-        break;
 
-    case 'b':
-        prefs->cacheStore("plot2", current_value);
-        mTurbine2->setValue(current_value.toInt());
-        break;
-    case 'c':
-        prefs->cacheStore("plot3", current_value);
-        mTurbine3->setValue(current_value.toInt());
-        break;
+    if ( current_value.toInt() != 0 ) {
 
-    case 'd':
-        prefs->cacheStore("plot4", current_value);
-        mTurbine4->setValue(current_value.toInt());
-        break;
-    case 'e':
-        prefs->cacheStore("plot5", current_value);
-        mTurbine5->setValue(current_value.toInt());
-        break;
-    case 'f':
-        prefs->cacheStore("plot1", current_value);
-        mTurbine6->setValue(current_value.toInt());
-        break;
+        switch (current_turbine) {
+        case 'a':
+            prefs->cacheStore("plot1", current_value);
+            mTurbine1->setValue(current_value.toInt());
+            break;
 
-    case 'g':
-        prefs->cacheStore("plot2", current_value);
-        mTurbine7->setValue(current_value.toInt());
-        break;
-    case 'h':
-        prefs->cacheStore("plot3", current_value);
-        mTurbine8->setValue(current_value.toInt());
-        break;
+        case 'b':
+            prefs->cacheStore("plot2", current_value);
+            mTurbine2->setValue(current_value.toInt());
+            break;
+        case 'c':
+            prefs->cacheStore("plot3", current_value);
+            mTurbine3->setValue(current_value.toInt());
+            break;
 
-    case 'i':
-        prefs->cacheStore("plot4", current_value);
-        mTurbine9->setValue(current_value.toInt());
-        break;
-    case 'j':
-        prefs->cacheStore("plot5", current_value);
-        mTurbine10->setValue(current_value.toInt());
-        break;
-    case 'k':
-        prefs->cacheStore("plot1", current_value);
-        mTurbine11->setValue(current_value.toInt());
-        break;
+        case 'd':
+            prefs->cacheStore("plot4", current_value);
+            mTurbine4->setValue(current_value.toInt());
+            break;
+        case 'e':
+            prefs->cacheStore("plot5", current_value);
+            mTurbine5->setValue(current_value.toInt());
+            break;
+        case 'f':
+            prefs->cacheStore("plot1", current_value);
+            mTurbine6->setValue(current_value.toInt());
+            break;
 
-    case 'l':
-        prefs->cacheStore("plot2", current_value);
-        mTurbine12->setValue(current_value.toInt());
-        break;
-    case 'm':
-        prefs->cacheStore("plot3", current_value);
-        mTurbine13->setValue(current_value.toInt());
-        break;
+        case 'g':
+            prefs->cacheStore("plot2", current_value);
+            mTurbine7->setValue(current_value.toInt());
+            break;
+        case 'h':
+            prefs->cacheStore("plot3", current_value);
+            mTurbine8->setValue(current_value.toInt());
+            break;
 
-    case 'n':
-        prefs->cacheStore("plot4", current_value);
-        mTurbine14->setValue(current_value.toInt());
-        break;
-    case 'o':
-        prefs->cacheStore("plot5", current_value);
-        mTurbine15->setValue(current_value.toInt());
-        break;
+        case 'i':
+            prefs->cacheStore("plot4", current_value);
+            mTurbine9->setValue(current_value.toInt());
+            break;
+        case 'j':
+            prefs->cacheStore("plot5", current_value);
+            mTurbine10->setValue(current_value.toInt());
+            break;
+        case 'k':
+            prefs->cacheStore("plot1", current_value);
+            mTurbine11->setValue(current_value.toInt());
+            break;
 
+        case 'l':
+            prefs->cacheStore("plot2", current_value);
+            mTurbine12->setValue(current_value.toInt());
+            break;
+        case 'm':
+            prefs->cacheStore("plot3", current_value);
+            mTurbine13->setValue(current_value.toInt());
+            break;
+
+        case 'n':
+            prefs->cacheStore("plot4", current_value);
+            mTurbine14->setValue(current_value.toInt());
+            break;
+        case 'o':
+            prefs->cacheStore("plot5", current_value);
+            mTurbine15->setValue(current_value.toInt());
+            break;
+
+        }
+
+        mOutput << current_time << " " << prefs->cacheLookup("plot1").toInt() << " " << prefs->cacheLookup("plot2").toInt() << " "
+                << prefs->cacheLookup("plot3").toInt() << " " << prefs->cacheLookup("plot4").toInt() << " " << prefs->cacheLookup("plot5").toInt() << " "
+                << prefs->cacheLookup("plot6").toInt() << " " << prefs->cacheLookup("plot7").toInt() << " " << prefs->cacheLookup("plot8").toInt() << " "
+                << prefs->cacheLookup("plot9").toInt()<< " " << prefs->cacheLookup("plot10").toInt() << " " << prefs->cacheLookup("plot11").toInt() << " "
+                << prefs->cacheLookup("plot12").toInt() << " " << prefs->cacheLookup("plot13").toInt() << " " << prefs->cacheLookup("plot14").toInt() << " "
+                << prefs->cacheLookup("plot15").toInt() << " " << std::endl;
     }
-
 
 
     if (mSerialPort->bytesAvailable() > 0)
