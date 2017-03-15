@@ -16,6 +16,10 @@
   <property name="windowTitle">
    <string>T.C.L Turbine Counter &amp; Logger</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/windmill.png</normaloff>:/windmill.png</iconset>
+  </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>

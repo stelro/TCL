@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2016
+ * Author: Stelmach Rostislav <stelmach.ro@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+
 #include "turbinetabpage.hpp"
 #include "qcgaugewidget.hpp"
 #include "preferences.hpp"
@@ -248,47 +266,47 @@ void TurbineTabPage::serialReciver()
             mTurbine5->setValue(current_value.toInt());
             break;
         case 'f':
-            prefs->cacheStore("plot1", current_value);
+            prefs->cacheStore("plot6", current_value);
             mTurbine6->setValue(current_value.toInt());
             break;
 
         case 'g':
-            prefs->cacheStore("plot2", current_value);
+            prefs->cacheStore("plot7", current_value);
             mTurbine7->setValue(current_value.toInt());
             break;
         case 'h':
-            prefs->cacheStore("plot3", current_value);
+            prefs->cacheStore("plot8", current_value);
             mTurbine8->setValue(current_value.toInt());
             break;
 
         case 'i':
-            prefs->cacheStore("plot4", current_value);
+            prefs->cacheStore("plot9", current_value);
             mTurbine9->setValue(current_value.toInt());
             break;
         case 'j':
-            prefs->cacheStore("plot5", current_value);
+            prefs->cacheStore("plot10", current_value);
             mTurbine10->setValue(current_value.toInt());
             break;
         case 'k':
-            prefs->cacheStore("plot1", current_value);
+            prefs->cacheStore("plot11", current_value);
             mTurbine11->setValue(current_value.toInt());
             break;
 
         case 'l':
-            prefs->cacheStore("plot2", current_value);
+            prefs->cacheStore("plot12", current_value);
             mTurbine12->setValue(current_value.toInt());
             break;
         case 'm':
-            prefs->cacheStore("plot3", current_value);
+            prefs->cacheStore("plot13", current_value);
             mTurbine13->setValue(current_value.toInt());
             break;
 
         case 'n':
-            prefs->cacheStore("plot4", current_value);
+            prefs->cacheStore("plot14", current_value);
             mTurbine14->setValue(current_value.toInt());
             break;
         case 'o':
-            prefs->cacheStore("plot5", current_value);
+            prefs->cacheStore("plot15", current_value);
             mTurbine15->setValue(current_value.toInt());
             break;
 

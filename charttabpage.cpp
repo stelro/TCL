@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2016
+ * Author: Stelmach Rostislav <stelmach.ro@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+
 #include "charttabpage.hpp"
 #include "qcustomplot/qcustomplot.h"
 #include "preferences.hpp"
@@ -35,21 +53,21 @@ ChartTabPage::ChartTabPage()
     , mPlotEnabled13(false)
     , mPlotEnabled14(false)
     , mPlotEnabled15(false)
-    , ccolor1(QColor(255,0,0))
-    , ccolor2(QColor(0,0,255))
-    , ccolor3(QColor(0,255,0))
-    , ccolor4(QColor(225,128,0))
-    , ccolor5(QColor(255,191,0))
-    , ccolor6(QColor(128,255,0))
-    , ccolor7(QColor(64,255,0))
-    , ccolor8(QColor(0,255,191))
-    , ccolor9(QColor(64,0,255))
-    , ccolor10(QColor(191,0,255))
-    , ccolor11(QColor(255,0,255))
-    , ccolor12(QColor(255,0,128))
-    , ccolor13(QColor(0,128,255))
-    , ccolor14(QColor(255,0,64))
-    , ccolor15(QColor(0,255,191))
+    , ccolor1(QColor(179, 0, 0))
+    , ccolor2(QColor(255, 0, 0))
+    , ccolor3(QColor(255, 51, 51))
+    , ccolor4(QColor(255, 102, 102))
+    , ccolor5(QColor(255, 153, 153))
+    , ccolor6(QColor(0, 0, 179))
+    , ccolor7(QColor(0, 0, 255))
+    , ccolor8(QColor(51, 51, 255))
+    , ccolor9(QColor(102, 102, 255))
+    , ccolor10(QColor(179, 179, 255))
+    , ccolor11(QColor(0, 102, 0))
+    , ccolor12(QColor(0, 153, 0))
+    , ccolor13(QColor(0, 204, 0))
+    , ccolor14(QColor(77, 255, 77))
+    , ccolor15(QColor(179, 255, 179))
 {
 
     mPlot->addGraph();
@@ -155,7 +173,7 @@ ChartTabPage::ChartTabPage()
     QVBoxLayout *vlayout2 = new QVBoxLayout;
 
     QHBoxLayout *cHlayout1 = new QHBoxLayout;
-    QLabel *clabel1 = new QLabel("<font color='black'> Turbine 1: </font>");
+    QLabel *clabel1 = new QLabel("<font color='black'> Turbine 1:  </font>");
     cHlayout1->addWidget(clabel1);
     cbutton1 = new QPushButton("...");
     cbutton1->setStyleSheet(getColorString(ccolor1));
@@ -240,6 +258,7 @@ ChartTabPage::ChartTabPage()
 
     QHBoxLayout *cHlayout6 = new QHBoxLayout;
     QLabel *clabel6 = new QLabel("<font color='black'> Turbine 6: </font>");
+    clabel6->setMargin(3);
     cHlayout6->addWidget(clabel6);
     cbutton6 = new QPushButton("...");
     cbutton6->setStyleSheet(getColorString(ccolor6));
@@ -256,6 +275,7 @@ ChartTabPage::ChartTabPage()
     QHBoxLayout *cHlayout7 = new QHBoxLayout;
     QLabel *clabel7 = new QLabel("<font color='black'> Turbine 7: </font>");
     cHlayout7->addWidget(clabel7);
+    clabel7->setMargin(3);
     cbutton7 = new QPushButton("...");
     cbutton7->setStyleSheet(getColorString(ccolor7));
     cbutton7->setFixedWidth(CBUTTON_WIDTH);
@@ -272,6 +292,7 @@ ChartTabPage::ChartTabPage()
     QHBoxLayout *cHlayout8 = new QHBoxLayout;
     QLabel *clabel8 = new QLabel("<font color='black'> Turbine 8: </font>");
     cHlayout8->addWidget(clabel8);
+    clabel8->setMargin(3);
     cbutton8 = new QPushButton("...");
     cbutton8->setStyleSheet(getColorString(ccolor8));
     cbutton8->setFixedWidth(CBUTTON_WIDTH);
@@ -288,6 +309,7 @@ ChartTabPage::ChartTabPage()
     QHBoxLayout *cHlayout9 = new QHBoxLayout;
     QLabel *clabel9 = new QLabel("<font color='black'> Turbine 9: </font>");
     cHlayout9->addWidget(clabel9);
+    clabel9->setMargin(3);
     cbutton9 = new QPushButton("...");
     cbutton9->setStyleSheet(getColorString(ccolor9));
     cbutton9->setFixedWidth(CBUTTON_WIDTH);
