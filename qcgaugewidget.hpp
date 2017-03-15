@@ -1,3 +1,5 @@
+
+
 #ifndef QCGAUGEWIDGET_H
 #define QCGAUGEWIDGET_H
 
