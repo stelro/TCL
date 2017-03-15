@@ -11,9 +11,9 @@ GUI Main Author Stelmach Rostislav < stelmach.ro@gmail.com >
 
 ## Screenshots
 
-![alt tag](http://prntscr.com/ek9r7i)
-![alt tag](http://prntscr.com/ek9rhy)
-![alt tag](http://prntscr.com/ek9rr1)
+![Imgur](http://i.imgur.com/Jufw5jl.png)
+![Imgur](http://i.imgur.com/5LL5HNw.png)
+![Imgur](http://i.imgur.com/vEQ9r0w.png)
 
 ## License
 
